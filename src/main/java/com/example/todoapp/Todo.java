@@ -1,19 +1,20 @@
 package com.example.todoapp;
 
 public class Todo {
-	static int nextId = 0;
-	public int id;
-	public String author;
-	public String creationDate;
-	public String dueDate;
-	public String content;
+	public final int id;
+	public final String author;
+	public final String created;
+	public final String due;
+	public final String content;
+	public final boolean done;
 
-	public Todo(String author, String creationDate, String dueDate, String content) {
-		id = nextId++;
+	public Todo(int id, String author, String created, String due, String content, boolean done) {
+		this.id = id;
 		this.author = author;
-		this.creationDate = creationDate;
-		this.dueDate = dueDate;
+		this.created = created;
+		this.due = due;
 		this.content = content;
+		this.done = done;
 	}
 
 }

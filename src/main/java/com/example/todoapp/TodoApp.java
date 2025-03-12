@@ -42,13 +42,22 @@ public class TodoApp {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/todo/{id}")
 	void updateTodo(@PathVariable int id, @RequestParam Map<String, String> map) {
-		db.updateTodo(id, map.get("author"), map.get("creationDate"), map.get("dueDate"), map.get("content"));
+		String author  = map.get("author");
+		String created = map.get("created");
+		String due     = map.get("due");
+		String content = map.get("content");
+		String done    = map.get("done");
+		if (author != null) db.updateTodoAuthor(id, author);
+		if (created != null) db.updateTodoCreated(id, created);
+		if (due != null) db.updateTodoDue(id, due);
+		if (content != null) db.updateTodoContent(id, content);
+		if (done != null) db.updateTodoDone(id, done == "true");
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/todo")
 	void createTodo() {
-		db.createTodo(new Todo("test", "test", "test", "test"));
+		db.createTodo(new Todo(0, "me", null, "tomorrow", "test content", false));
 	}
 
 	public static void main(String[] args) {
