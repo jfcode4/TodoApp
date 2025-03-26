@@ -93,18 +93,18 @@ class Database {
 		}
 	}
 
-	public int createTodo(Todo todo) {
+	public int createTodo(String author, String due, String content) {
 		try {
 			PreparedStatement s = conn.prepareStatement("INSERT INTO todos(author, created, due, content) VALUES (?, datetime('now'), ?, ?)");
-			s.setString(1, todo.author);
-			s.setString(2, todo.due);
-			s.setString(3, todo.content);
+			s.setString(1, author);
+			s.setString(2, due);
+			s.setString(3, content);
 			s.executeUpdate();
 			//s.close();
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL Error", e);
 		}
-		return todo.id;
+		return 0;
 	}
 
 	public void deleteTodo(int id) {

@@ -9,6 +9,13 @@
     <h1>Todos</h1>
     <p>List of todos:</p>
     <div id="todos"></div>
+
+	<form onsubmit="createTodo(event)">
+		<label>Create todo:</label>
+		<input id="content" type="text">
+		<button type="submit">Create</button>
+	</form>
+
 	<script src="script.js"></script>
 </body>
 </html>
