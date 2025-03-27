@@ -1,0 +1,76 @@
+body {
+	background-color: #322a26;
+	color: #eec643;
+}
+
+body p {
+	text-align: center;
+}
+
+h1 {
+	color: #d33f49;
+	text-align: center;
+}
+
+.todo {
+	background-color: #2364aa;
+	color:  lightgray;
+	margin: auto;
+	margin-bottom: 8px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 75%;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.todo h3 {
+	text-align: left;
+	flex-basis: 100%;
+	color: #eec643;
+	padding: 1px;
+	align-content: center;
+}
+
+.todo p {
+	width: 80%;
+}
+
+.todo button {
+	background-color: #d33f49;
+	height: fit-content;
+	margin: auto;
+	color: white;
+	flex-basis: 10%;
+}
+
+button {
+	border: none;
+	padding: 10px;
+	border-radius: 6px;
+	font-weight: bold;
+}
+
+button:hover {
+	filter: brightness(70%);
+	cursor: pointer;
+}
+
+form {
+	background-color: #eec643;
+	color: #191308;
+	border-radius: 10px;
+	width: fit-content;
+	margin: auto;
+	padding: 5px;
+}
+
+form input {
+	width: 400px;
+	height: 30px;
+}
+
+form button {
+	background-color: #1a1;
+	color: white;
+}
