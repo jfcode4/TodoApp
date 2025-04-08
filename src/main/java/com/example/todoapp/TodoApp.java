@@ -56,14 +56,14 @@ public class TodoApp {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/todo")
-	void createTodo(@RequestParam Map<String, String> map) {
+	Todo createTodo(@RequestParam Map<String, String> map) {
 		String author  = map.get("author");
 		String due     = map.get("due");
 		String content = map.get("content");
 		if (author == null) author = "me";
 		if (due == null) due = "tomorrow";
 		if (content == null) content = "empty";
-		db.createTodo(author, due, content);
+		return db.createTodo(author, due, content);
 	}
 
 	public static void main(String[] args) {

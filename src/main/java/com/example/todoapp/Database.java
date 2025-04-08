@@ -75,9 +75,8 @@ class Database {
 		try {
 			Statement s = conn.createStatement();
 			ResultSet r = s.executeQuery("SELECT rowid, * FROM todos WHERE rowid=" + id);
-			//s.close();
 			if (r.next()) {
-				return new Todo(
+				Todo res = new Todo(
 					r.getInt("rowid"),
 					r.getString("author"),
 					r.getString("created"),
@@ -85,7 +84,10 @@ class Database {
 					r.getString("content"),
 					r.getBoolean("done")
 				);
+				s.close();
+				return res;
 			} else {
+				s.close();
 				return null;
 			}
 		} catch (SQLException e) {
@@ -93,18 +95,30 @@ class Database {
 		}
 	}
 
-	public int createTodo(String author, String due, String content) {
+	public Todo createTodo(String author, String due, String content) {
 		try {
-			PreparedStatement s = conn.prepareStatement("INSERT INTO todos(author, created, due, content) VALUES (?, datetime('now'), ?, ?)");
+			PreparedStatement s = conn.prepareStatement("INSERT INTO todos(author, created, due, content) VALUES (?, datetime('now'), ?, ?) RETURNING rowid,*");
 			s.setString(1, author);
 			s.setString(2, due);
 			s.setString(3, content);
-			s.executeUpdate();
-			//s.close();
+			ResultSet r = s.executeQuery();
+			if (r.next()) {
+				Todo res = new Todo(
+					r.getInt("rowid"),
+					r.getString("author"),
+					r.getString("created"),
+					r.getString("due"),
+					r.getString("content"),
+					r.getBoolean("done")
+				);
+				s.close();
+				return res;
+			}
+			s.close();
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL Error", e);
 		}
-		return 0;
+		return null;
 	}
 
 	public void deleteTodo(int id) {
